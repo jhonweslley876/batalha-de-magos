@@ -211,12 +211,14 @@ while player > 0 or mago > 0:
     elif mago <= 0:
         magos(player, mago)
         escrever_texto('Parabéns, você venceu o mago!')
-        
-    cont = 1
-    if cont == 1:
+
+    cont = 1 # quantidade de vingança
+
+    if cont == 1: #cena da vingança
         if mago <= 15:
-            print(f'| {mana2} Mana  |')
-        cont -= 1
+            print(f'| {mana2} Mana  |') # tabela do mago para reviravolta
+            # opção de poupar e matar
+        cont -= 1 # vingança aparece apenas uma vez no jogo
 
 
     continuar = input('Deseja continuar jogando? (s/n): ').strip().lower()
