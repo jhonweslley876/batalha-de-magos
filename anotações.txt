@@ -1,0 +1,30 @@
+mago HP menor ou igual a 15:
+
+barra de diálogo
+
+poupar ou matar
+
+matar = 2 opções: acertar -> Mata o bot em um golpe único, ultimas palavras do mago
+errar(ATK menor que a vida do bot) -> Mago recupera HP do 1d20 e dá 1d20 de dano
+
+poupar = diálogos: "vc o deixa viver, dá as costas a ele e segue o seu caminho"
+"vc foi apunhalado pelas costas"
+ataque: 1d100
+
+Multiplicador de dano: a cada turno que o jogador ganhar, ele pode decidir multiplicar o dano em 2.
+
+itens específicos para cada ação: ataque, cura, ataque crítico do mago, etc.
+
+| Situação                   | Símbolo |
+| -------------------------- | ------- |
+| Canto superior esquerdo    | ┌       |
+| Canto superior direito     | ┐       |
+| Canto inferior esquerdo    | └       |
+| Canto inferior direito     | ┘       |
+| Linha horizontal           | ─       |
+| Linha vertical             | │       |
+| Junção topo (T para baixo) | ┬       |
+| Junção base (T para cima)  | ┴       |
+| Junção esquerda (T p/ dir) | ├       |
+| Junção direita (T p/ esq)  | ┤       |
+| Cruzamento (+)             | ┼       |
