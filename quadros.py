@@ -103,7 +103,7 @@ def dano_player(vida, vida1, mana, mana1, poder, c):
         c += 10
 
     for d in range(c):
-        sys.stdout.write("\033[F" * 9)
+        sys.stdout.write("\033[F" * 14)
         sys.stdout.flush()
 
         nova_vida = vida - d
@@ -122,21 +122,6 @@ def dano_mago(vida, vida1, mana, mana1, poder, c):
         nova_vida = vida1 - d
         magos(vida, nova_vida, mana, mana1)
         time.sleep(0.1)
-
-# vidaa = 100
-# vidaa2 = 100
-# manaa = 100
-# manaa2 = 100
-# total = 21
-# total2 = 10
-# dano1  = 10
-
-# dano_player(vidaa, vidaa2, manaa, manaa2, total, dano1 + 1)
-# vidaa -= dano1 + 10
-# dano_mago(vidaa, vidaa2, manaa, manaa2, total2, dano2 + 1)
-# vidaa2 -= dano2
-# magos(vidaa, vidaa2, manaa, manaa2)
-
 
 def estouro_mago(vida, vida1, mana, mana1, c):
     for d in range(c + 1):
@@ -179,16 +164,29 @@ def mana_empate(vida, vida1, mana, mana1, c):
         magos(vida, vida1, nova_mana, nova_mana2)
         time.sleep(0.1)
 
-# estouro_player(vidaa, vidaa2, manaa, manaa2, dano1)
-# vidaa -= 10
-# manaa -= 10
+def vingança_HP(vida, mana, c):
+    for d in range(c + 1):
+        sys.stdout.write("\033[F" * 5)
+        sys.stdout.flush()
 
-# estouro_mago(vidaa, vidaa2, manaa, manaa2, dano1)
-# vidaa2 -= 10
-# manaa2 -= 10
-# magos(vidaa, vidaa2, manaa, manaa2)
+        nova_vida = vida + d
+        time.sleep(0.1)
+        vingança(nova_vida, mana)
 
-# mana_empate(vidaa, vidaa2, manaa, manaa2, 10)
-# manaa -= 10
-# manaa2 -= 10
-# magos(vidaa, vidaa2, manaa, manaa2)
+def dialogo_mago():
+    mensagem = "vc o deixa viver, dá as costas a ele e segue o seu caminho"
+    escrever_texto_na_caixa(mensagem, largura=60, velocidade=0.05)
+    time.sleep(1)
+
+    mensagem = '...'
+    escrever_texto_na_caixa(mensagem, largura=3, velocidade=0.5)
+    time.sleep(1)
+
+    mensagem = "você foi apunhalado pelas costas"
+    escrever_texto_na_caixa(mensagem, largura=40, velocidade=0.1)
+    time.sleep(1)
+
+vidaa = 100
+vida2 = 100
+manaa = 100
+manaa2 = 100

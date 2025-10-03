@@ -1,3 +1,4 @@
+
 import os
 import random
 import time
@@ -171,4 +172,3 @@ def magos(vida1, vida2, mana, mana_bot): # estatísticas do jogador e mago
         print(quadro)
         print(f'│  {mana} Mana  │   {mana_bot} Mana  │')
         print('└────────────┴────────────┘')
-

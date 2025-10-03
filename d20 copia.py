@@ -49,7 +49,6 @@ while player > 0 or mago > 0:
         if compras == 1:
             if mana_player < 10: # se o jogador não tiver mana, para de comprar
                 escrever_texto('Mana insuficiente para comprar cartas')
-                mana_player = 0
                 break
             
             os.system('cls')
@@ -157,7 +156,6 @@ while player > 0 or mago > 0:
                 print(f'\n{dano} + 10 ATK')
                 escrever_texto(f'\nVocê sofreu {dano + 10} de dano.')
                 
-                time.sleep(0.5)
                 os.system('cls')
 
                 dano_player(player, mago, mana_player, mana_mago, total, dano + 1)
@@ -174,7 +172,6 @@ while player > 0 or mago > 0:
 
                 escrever_texto(f'\nVocê sofreu {dano} de dano.')
                 
-                time.sleep(0.3)
                 os.system('cls')
 
                 dano_player(player, mago, mana_player, mana_mago, total, dano + 1)
@@ -195,7 +192,6 @@ while player > 0 or mago > 0:
 
             escrever_texto(f'\nMago sofreu {dano} de dano.')
 
-            time.sleep(0.3)
             os.system('cls')
 
             dano_mago(player, mago, mana_player, mana_mago, total, dano + 1)
@@ -213,7 +209,6 @@ while player > 0 or mago > 0:
 
             escrever_texto(f'\nVocê sofreu {dano + 10} de dano.')
 
-            time.sleep(0.3)
             os.system('cls')
 
             dano_player(player, mago, mana_player, mana_mago, mago_total, dano + 1)
@@ -233,7 +228,6 @@ while player > 0 or mago > 0:
 
             escrever_texto(f'\nMago sofreu {dano} de dano.')
 
-            time.sleep(0.3)
             os.system('cls')
 
             dano_mago(player, mago, mana_player, mana_mago, total, dano + 1)
@@ -253,7 +247,6 @@ while player > 0 or mago > 0:
 
             escrever_texto(f'\nVocê sofreu {dano} de dano.')
 
-            time.sleep(0.3)
             os.system('cls')
 
             dano_player(player, mago, mana_player, mana_mago, total, dano + 1)
@@ -262,7 +255,6 @@ while player > 0 or mago > 0:
         elif mago_total == total:
             escrever_texto('Empate, ambos perderam 10 de MANA.')
             dano = 10
-            time.sleep(0.3)
             os.system('cls')
 
             mana_empate(player, mago, mana_player, mana_mago, dano)

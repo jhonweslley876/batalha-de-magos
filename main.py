@@ -49,6 +49,7 @@ while player > 0 or mago > 0:
         if compras == 1:
             if mana_player < 10: # se o jogador não tiver mana, para de comprar
                 escrever_texto('Mana insuficiente para comprar cartas')
+                time.sleep(1)
                 break
             
             os.system('cls')
@@ -77,16 +78,18 @@ while player > 0 or mago > 0:
 
     if total == 21:
         print('Parabéns, você ganhou!')
-        print('Dano crítico por valor 21!')
+        escrever_texto('Dano crítico por valor 21!')
 
         for i in range(30): # sistema de dano
             dano = random.randint(1, 20) # escolhe aleatóriamente entre 1 e 20
             print(f'\r{dano} ATK', end=' ', flush=True) # imprime a variável na mesma linha apagando a mensagem anterior
             time.sleep(0.1)
         print(f'\nVocê: {dano} + 10 ATK')
-        mago -= dano + 10
-
         escrever_texto(f'\nMago sofreu {dano + 10} de dano.')
+        os.system('cls')
+
+        dano_mago(player, mago, mana_player, mana_mago, total, dano + 1)
+        mago -= dano + 10
 
     else:
         os.system('cls')
@@ -121,16 +124,24 @@ while player > 0 or mago > 0:
             escrever_texto("ambos estouraram, passaram de 21 pontos.")
             mensagem = '-10 de HP e MANA para ambos'
             escrever_texto_na_caixa(mensagem, largura=40, velocidade=0.03)
-            mana_mago -= 10
+
+            dano = 10
+            os.system('cls')
+
+            estouro_player(player, mago, mana_player, mana_mago, dano)
             mana_player -= 10
             player -= 10
+            
+            estouro_mago(player, mago, mana_player, mana_mago, dano)
             mago -= 10
+            mana_mago -= 10
 
         elif total > 21:
             os.system('cls')
             print('__________________________________________________')
             print(f'Você perdeu. Seu total de pontos é {total}.')
             print(tabela2)
+
             if mago_total == 21:
                 print('Mago ganhou com 21!')
                 print('Dano crítico por valor 21.')
@@ -140,19 +151,28 @@ while player > 0 or mago > 0:
                     print(f'\r{dano} ATK', end=' ', flush=True)
                     time.sleep(0.1)
                 print(f'\n{dano} + 10 ATK')
+                escrever_texto(f'\nVocê sofreu {dano + 10} de dano.')
+                
+                os.system('cls')
+
+                dano_player(player, mago, mana_player, mana_mago, total, dano + 1)
                 player -= dano + 10
 
-                escrever_texto(f'\nVocê sofreu {dano + 10} de dano.')
             else:
                 print(f'Mago: {mago_total}')
                 escrever_texto('Você estourou valor, e o mago teve valor menor que 21!')
+
                 for i in range(30):
                     dano = random.randint(1, 20)
                     print(f'\r{dano} ATK', end=' ', flush=True)
                     time.sleep(0.1)
 
-                player -= dano
                 escrever_texto(f'\nVocê sofreu {dano} de dano.')
+                
+                os.system('cls')
+
+                dano_player(player, mago, mana_player, mana_mago, total, dano + 1)
+                player -= dano
 
         elif mago_total > 21:
             print('Mago estourou o valor.')
@@ -167,8 +187,12 @@ while player > 0 or mago > 0:
                 print(f'\r{dano} ATK', end=' ', flush=True)
                 time.sleep(0.1)
 
-            mago -= dano
             escrever_texto(f'\nMago sofreu {dano} de dano.')
+
+            os.system('cls')
+
+            dano_mago(player, mago, mana_player, mana_mago, total, dano + 1)
+            mago -= dano
 
         elif mago_total == 21:
             print('Mago ganhou com 21!')
@@ -179,24 +203,32 @@ while player > 0 or mago > 0:
                 print(f'\r{dano} ATK', end=' ', flush=True)
                 time.sleep(0.1)
             print(f'\n{dano} + 10 ATK')
-            player -= dano + 10
 
             escrever_texto(f'\nVocê sofreu {dano + 10} de dano.')
 
+            os.system('cls')
+
+            dano_player(player, mago, mana_player, mana_mago, mago_total, dano + 1)
+            player -= dano + 10
+
         elif total > mago_total:
-                print('Você ganhou!')
-                print('__________________________________________________')
-                print(f'Mago: {mago_total}')
-                print(f'Seu total: {total}')
-                print('__________________________________________________')
+            print('Você ganhou!')
+            print('__________________________________________________')
+            print(f'Mago: {mago_total}')
+            print(f'Seu total: {total}')
+            print('__________________________________________________')
 
-                for i in range(30):
-                    dano = random.randint(1, 20)
-                    print(f'\r{dano} ATK', end=' ', flush=True)
-                    time.sleep(0.1)
+            for i in range(30):
+                dano = random.randint(1, 20)
+                print(f'\r{dano} ATK', end=' ', flush=True)
+                time.sleep(0.1)
 
-                mago -= dano
-                escrever_texto(f'\nMago sofreu {dano} de dano.')
+            escrever_texto(f'\nMago sofreu {dano} de dano.')
+
+            os.system('cls')
+
+            dano_mago(player, mago, mana_player, mana_mago, total, dano + 1)
+            mago -= dano
 
         elif mago_total > total:
             print('Mago ganhou!')
@@ -210,13 +242,21 @@ while player > 0 or mago > 0:
                 print(f'\r{dano} ATK', end=' ', flush=True)
                 time.sleep(0.1)
 
-            player -= dano
             escrever_texto(f'\nVocê sofreu {dano} de dano.')
 
+            os.system('cls')
+
+            dano_player(player, mago, mana_player, mana_mago, total, dano + 1)
+            player -= dano
+
         elif mago_total == total:
-            escrever_texto('Empate, ambos perderam 10 de mana.')
-            mana_mago -= 10
+            escrever_texto('Empate, ambos perderam 10 de MANA.')
+            dano = 10
+            os.system('cls')
+
+            mana_empate(player, mago, mana_player, mana_mago, dano)
             mana_player -= 10
+            mana_mago -= 10
 
     if player <= 0:
         player = 0
@@ -230,8 +270,9 @@ while player > 0 or mago > 0:
         escrever_texto('Parabéns, você venceu o mago!')
         break
 
-    if cont == 1: #cena da vingança
+    if cont == 1: 
         if mago <= 15:
+            os.system('cls')
             vingança(mago, mana_mago) # tabela do mago para reviravolta
             mensagem = "Mago está com pouca vida, o que você deseja fazer?"
             escrever_texto_na_caixa(mensagem, largura=50, velocidade=0.03)
@@ -239,15 +280,40 @@ while player > 0 or mago > 0:
             print('│ 1 │   matar  │ 2 │   poupar  │')
             print('└───┴──────────┴───┴───────────┘')
             escolha = int(input())
+            os.system('cls')
             if escolha == 1:
                 var = random.randint(1, 20)
-                if var >= mago:
+                if var < 1:
                     print() # provisório, adicionar ultimas palavras
+                elif var >= 1:
+
+                    dano = random.randint(1, 20)
+                    vida = random.randint(1, 20)
+                    os.system('cls')
+                    vingança_HP(mago, mana_mago, vida)
+                    mago += vida
+                    escrever_texto(f'Mago recuperou {vida} de HP.')
+
+            elif escolha == 2:
+                dano = random.randint(1, 100)
+                dialogo_mago()
+
+                os.system('cls')
+                for c in range(dano):
+                    dano = c
+                    print(f'\r{c}', end='', flush=True) 
+                    time.sleep(0.1)
+
+                os.system('cls')
+                print(f'\n Você sofreu {dano} ATK')
+                time.sleep(1)
+                
+                dano_player(player, mago, mana_player, mana_mago, total, dano + 1)
                     
             cont -= 1 # vingança aparece apenas uma vez no jogo
 
     continuar = input('Deseja continuar jogando? (s/n): ').strip().lower()
-    os.system('cls')
+    os.system('cls')    
     mana_player += 5
     mana_mago += 5
     if mana_player > 100:
