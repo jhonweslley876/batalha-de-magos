@@ -2,17 +2,17 @@ from funções import *
 from quadros import *
 
 # carregamento inicial do jogo, regras e diálogos
-carregamento()
-escrever_texto('\nJogo carregado.')
-time.sleep(2)
-os.system('cls') # limpa o terminal para deixar a interface mais limpa
-regras()
+# carregamento()
+# escrever_texto('\nJogo carregado.')
+# time.sleep(2)
+# os.system('cls') # limpa o terminal para deixar a interface mais limpa
+# regras()
 
 cont = 1 # quant mago
-dialogo()
+# dialogo()
 
 player = 100 # vida do jogador
-mago = 100 # vida do mago
+mago = 15 # vida do mago
 mana_player = 100 # mana do jogador
 mana_mago = 100 # mana do mago
 
@@ -21,7 +21,8 @@ while player > 0 or mago > 0:
     magos(player, mago, mana_player, mana_mago) # tabela de estatísticas dos jogadores
 
     baralho = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10] * 4
-    random.shuffle(baralho) # embaralha aleatoriamente
+    for c in range(10):
+        random.shuffle(baralho) # embaralha aleatoriamente
 
     def formatar_carta(carta):
         if carta == 1:
@@ -102,12 +103,13 @@ while player > 0 or mago > 0:
         print(f'Mago: {mago_total}')
 
         while mago_total < 16:
+            if mana_mago < 10:
+                break
 
             nova_carta = baralho.pop()
             cartas_bot.append(nova_carta)
             mago_total += nova_carta
             mana_mago -= 10
-
             print(f'Bot 1 comprou: {formatar_carta(nova_carta)}')
 
             os.system('cls')
@@ -260,12 +262,14 @@ while player > 0 or mago > 0:
 
     if player <= 0:
         player = 0
+        os.system('cls')
         magos(player, mago, mana_player, mana_mago)
         print(f'Que pena, você perdeu todo o seu HP. Tente novamente.')
         break
 
     elif mago <= 0:
         mago = 0
+        os.system('cls')
         magos(player, mago, mana_player, mana_mago)
         escrever_texto('Parabéns, você venceu o mago!')
         break
@@ -282,13 +286,33 @@ while player > 0 or mago > 0:
             escolha = int(input())
             os.system('cls')
             if escolha == 1:
-                var = random.randint(1, 20)
+                for c in range(30):
+                    var = random.randint(1, 20)
+                    print(f'\r{var} ATK', end='', flush=True)
+                    time.sleep(0.1)
+                time.sleep(1)
+
                 if var < 1:
                     print() # provisório, adicionar ultimas palavras
                 elif var >= 1:
+                    
+                    os.system('cls')
+                    mensagem = 'Você ataca, e ele se esquiva.'
+                    escrever_texto_na_caixa(mensagem, largura = 40, velocidade = 0.03)
+                    time.sleep(1)
+                    
+                    mensagem = 'Após isso, ele abre seu livro, e utiliza um dado de cura.'
+                    escrever_texto_na_caixa(mensagem, largura =60, velocidade = 0.03)
+                    time.sleep(1)
 
                     dano = random.randint(1, 20)
-                    vida = random.randint(1, 20)
+                    
+                    for c in range(30):
+                        vida = random.randint(1, 20)
+                        print(f'\r{vida} HP', end='', flush=True)
+                        time.sleep(0.1)
+                    time.sleep(1)
+                        
                     os.system('cls')
                     vingança_HP(mago, mana_mago, vida)
                     mago += vida
@@ -313,11 +337,14 @@ while player > 0 or mago > 0:
             cont -= 1 # vingança aparece apenas uma vez no jogo
 
     continuar = input('Deseja continuar jogando? (s/n): ').strip().lower()
-    os.system('cls')    
+    os.system('cls')  
+
     mana_player += 5
     mana_mago += 5
+
     if mana_player > 100:
         mana_player = 100
+
     if mana_mago > 100:
         mana_mago = 100
 
