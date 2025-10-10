@@ -86,6 +86,7 @@ while player > 0 or mago > 0:
             dano = random.randint(1, 20) # escolhe aleatóriamente entre 1 e 20
             print(f'\r{dano} ATK', end=' ', flush=True) # imprime a variável na mesma linha apagando a mensagem anterior
             time.sleep(0.1)
+
         print(f'\nVocê: {dano} + 10 ATK')
         escrever_texto(f'\nMago sofreu {dano + 10} de dano.')
         os.system('cls')
@@ -294,7 +295,7 @@ while player > 0 or mago > 0:
                 time.sleep(1)
 
                 if mago <= var:
-                    escrever_texto('Você acerta um golpe em cheio no mago')
+                    escrever_texto('\nVocê acerta um golpe em cheio no mago')
                     time.sleep(1)
 
                     dano_mago(player, mago, mana_player, mana_mago, total, var)
@@ -305,7 +306,7 @@ while player > 0 or mago > 0:
                 elif mago > var:
                     
                     os.system('cls')
-                    mensagem = 'Você ataca, e ele se esquiva.'
+                    mensagem = '\nVocê ataca, e ele se esquiva.'
                     escrever_texto_na_caixa(mensagem, largura = 40, velocidade = 0.03)
                     time.sleep(1)
                     
@@ -350,6 +351,7 @@ while player > 0 or mago > 0:
                 escrever_texto('Descrição:')
                 time.sleep(0.5)
                 escrever_texto('Seus ataques agora podem dar de 5-30 de dano.')
+                força = True
                 
             cont -= 1 # vingança aparece apenas uma vez no jogo
 
