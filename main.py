@@ -13,13 +13,13 @@ cont = 1 # quant mago
 força = False
 
 player = 100 # vida do jogador
-mago = 100 # vida do mago
+vida_mago = 100 # vida do mago
 mana_player = 100 # mana do jogador
 mana_mago = 100 # mana do mago
 
-while player > 0 or mago > 0: 
+while player > 0 or vida_mago > 0: 
 
-    magos(player, mago, mana_player, mana_mago) # tabela de estatísticas dos jogadores
+    magos(player, vida_mago, mana_player, mana_mago) # tabela de estatísticas dos jogadores
 
     baralho = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10] * 4
     for c in range(10):
@@ -82,17 +82,24 @@ while player > 0 or mago > 0:
         print('Parabéns, você ganhou!')
         escrever_texto('Dano crítico por valor 21!')
 
-        for i in range(30): # sistema de dano
-            dano = random.randint(1, 20) # escolhe aleatóriamente entre 1 e 20
-            print(f'\r{dano} ATK', end=' ', flush=True) # imprime a variável na mesma linha apagando a mensagem anterior
-            time.sleep(0.1)
+        if força == True:
+            for c in range(30):
+                dano = random.randint(5, 30)
+                print(f'\r{dano} ATK', end=' ', flush=True)
+                time.sleep(0.1)
+
+        else:
+            for i in range(30): # sistema de dano
+                dano = random.randint(1, 20) # escolhe aleatóriamente entre 1 e 20
+                print(f'\r{dano} ATK', end=' ', flush=True) # imprime a variável na mesma linha apagando a mensagem anterior
+                time.sleep(0.1)
 
         print(f'\nVocê: {dano} + 10 ATK')
         escrever_texto(f'\nMago sofreu {dano + 10} de dano.')
         os.system('cls')
 
-        dano_mago(player, mago, mana_player, mana_mago, total, dano + 1)
-        mago -= dano + 10
+        dano_mago(player, vida_mago, mana_player, mana_mago, total, dano + 1)
+        vida_mago -= dano + 10
 
     else:
         os.system('cls')
@@ -132,12 +139,12 @@ while player > 0 or mago > 0:
             dano = 10
             os.system('cls')
 
-            estouro_player(player, mago, mana_player, mana_mago, dano)
+            estouro_player(player, vida_mago, mana_player, mana_mago, dano)
             mana_player -= 10
             player -= 10
             
-            estouro_mago(player, mago, mana_player, mana_mago, dano)
-            mago -= 10
+            estouro_mago(player, vida_mago, mana_player, mana_mago, dano)
+            vida_mago -= 10
             mana_mago -= 10
 
         elif total > 21:
@@ -159,7 +166,7 @@ while player > 0 or mago > 0:
                 
                 os.system('cls')
 
-                dano_player(player, mago, mana_player, mana_mago, total, dano + 1)
+                dano_player(player, vida_mago, mana_player, mana_mago, total, dano + 1)
                 player -= dano + 10
 
             else:
@@ -175,7 +182,7 @@ while player > 0 or mago > 0:
                 
                 os.system('cls')
 
-                dano_player(player, mago, mana_player, mana_mago, total, dano + 1)
+                dano_player(player, vida_mago, mana_player, mana_mago, total, dano + 1)
                 player -= dano
 
         elif mago_total > 21:
@@ -186,17 +193,24 @@ while player > 0 or mago > 0:
             print(f'Seu total: {total}')
             print('__________________________________________________')
 
-            for i in range(30):
-                dano = random.randint(1, 20)
-                print(f'\r{dano} ATK', end=' ', flush=True)
-                time.sleep(0.1)
+            if força == True:
+                for c in range(30):
+                    dano = random.randint(5, 30)
+                    print(f'\r{dano} ATK', end=' ', flush=True)
+                    time.sleep(0.1)
+
+            else:
+                for i in range(30): # sistema de dano
+                    dano = random.randint(1, 20) # escolhe aleatóriamente entre 1 e 20
+                    print(f'\r{dano} ATK', end=' ', flush=True) # imprime a variável na mesma linha apagando a mensagem anterior
+                    time.sleep(0.1)
 
             escrever_texto(f'\nMago sofreu {dano} de dano.')
 
             os.system('cls')
 
-            dano_mago(player, mago, mana_player, mana_mago, total, dano + 1)
-            mago -= dano
+            dano_mago(player, vida_mago, mana_player, mana_mago, total, dano + 1)
+            vida_mago -= dano
 
         elif mago_total == 21:
             print('Mago ganhou com 21!')
@@ -212,7 +226,7 @@ while player > 0 or mago > 0:
 
             os.system('cls')
 
-            dano_player(player, mago, mana_player, mana_mago, mago_total, dano + 1)
+            dano_player(player, vida_mago, mana_player, mana_mago, mago_total, dano + 1)
             player -= dano + 10
 
         elif total > mago_total:
@@ -222,17 +236,24 @@ while player > 0 or mago > 0:
             print(f'Seu total: {total}')
             print('__________________________________________________')
 
-            for i in range(30):
-                dano = random.randint(1, 20)
-                print(f'\r{dano} ATK', end=' ', flush=True)
-                time.sleep(0.1)
+            if força == True:
+                for c in range(30):
+                    dano = random.randint(5, 30)
+                    print(f'\r{dano} ATK', end=' ', flush=True)
+                    time.sleep(0.1)
+
+            else:
+                for i in range(30): # sistema de dano
+                    dano = random.randint(1, 20) # escolhe aleatóriamente entre 1 e 20
+                    print(f'\r{dano} ATK', end=' ', flush=True) # imprime a variável na mesma linha apagando a mensagem anterior
+                    time.sleep(0.1)
 
             escrever_texto(f'\nMago sofreu {dano} de dano.')
 
             os.system('cls')
 
-            dano_mago(player, mago, mana_player, mana_mago, total, dano + 1)
-            mago -= dano
+            dano_mago(player, vida_mago, mana_player, mana_mago, total, dano + 1)
+            vida_mago -= dano
 
         elif mago_total > total:
             print('Mago ganhou!')
@@ -250,7 +271,7 @@ while player > 0 or mago > 0:
 
             os.system('cls')
 
-            dano_player(player, mago, mana_player, mana_mago, total, dano + 1)
+            dano_player(player, vida_mago, mana_player, mana_mago, total, dano + 1)
             player -= dano
 
         elif mago_total == total:
@@ -258,28 +279,28 @@ while player > 0 or mago > 0:
             dano = 10
             os.system('cls')
 
-            mana_empate(player, mago, mana_player, mana_mago, dano)
+            mana_empate(player, vida_mago, mana_player, mana_mago, dano)
             mana_player -= 10
             mana_mago -= 10
 
     if player <= 0:
         player = 0
         os.system('cls')
-        magos(player, mago, mana_player, mana_mago)
+        magos(player, vida_mago, mana_player, mana_mago)
         print(f'Que pena, você perdeu todo o seu HP. Tente novamente.')
         break
 
-    elif mago <= 0:
-        mago = 0
+    elif vida_mago <= 0:
+        vida_mago = 0
         os.system('cls')
-        magos(player, mago, mana_player, mana_mago)
+        magos(player, vida_mago, mana_player, mana_mago)
         escrever_texto('Parabéns, você venceu o mago!')
         break
 
     if cont == 1: 
-        if mago <= 15:
+        if vida_mago <= 15:
             os.system('cls')
-            vingança(mago, mana_mago) # tabela do mago para reviravolta
+            vingança(vida_mago, mana_mago) # tabela do mago para reviravolta
             mensagem = "Mago está com pouca vida, o que você deseja fazer?"
             escrever_texto_na_caixa(mensagem, largura=50, velocidade=0.03)
             print('┌───┬──────────┬───┬───────────┐')
@@ -294,16 +315,16 @@ while player > 0 or mago > 0:
                     time.sleep(0.1)
                 time.sleep(1)
 
-                if mago <= var:
+                if vida_mago <= var:
                     escrever_texto('\nVocê acerta um golpe em cheio no mago')
                     time.sleep(1)
 
-                    dano_mago(player, mago, mana_player, mana_mago, total, var)
+                    dano_mago(player, vida_mago, mana_player, mana_mago, total, var)
                     
                     escrever_texto('Você derrota o mago.')
                     time.sleep(1)
 
-                elif mago > var:
+                elif vida_mago > var:
                     
                     os.system('cls')
                     mensagem = '\nVocê ataca, e ele se esquiva.'
@@ -323,8 +344,8 @@ while player > 0 or mago > 0:
                     time.sleep(1)
                         
                     os.system('cls')
-                    vingança_HP(mago, mana_mago, vida)
-                    mago += vida
+                    vingança_HP(vida_mago, mana_mago, vida)
+                    vida_mago += vida
                     escrever_texto(f'Mago recuperou {vida} de HP.')
 
             elif escolha == 2:
@@ -341,16 +362,19 @@ while player > 0 or mago > 0:
                 print(f'\n Você sofreu {dano} ATK')
                 time.sleep(1)
                 
-                dano_player(player, mago, mana_player, mana_mago, total, dano + 1)
+                dano_player(player, vida_mago, mana_player, mana_mago, total, dano + 1)
 
                 mensagem = 'Desbloqueado: Ataque de raiva'
                 escrever_texto_na_caixa(mensagem, largura=40, velocidade=0.03)
-                time.sleep(1)
+                time.sleep(0.3)
+                escrever_texto('Enter para continuar')
+                keyboard.wait('enter')
+                input('')
 
                 os.system('cls')
                 escrever_texto('Descrição:')
                 time.sleep(0.5)
-                escrever_texto('Seus ataques agora podem dar de 5-30 de dano.')
+                escrever_texto('Seus ataques agora podem dar de 5 - 30 de dano.')
                 força = True
                 
             cont -= 1 # vingança aparece apenas uma vez no jogo
@@ -372,7 +396,7 @@ while player > 0 or mago > 0:
         os.system('cls')
 
         print('Vida final do jogo:')
-        magos(player, mago, mana_player, mana_mago)
+        magos(player, vida_mago, mana_player, mana_mago)
 
         print('saindo...')
         carregamento()
