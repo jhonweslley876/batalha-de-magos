@@ -2,17 +2,18 @@ from funções import *
 from quadros import *
 
 # carregamento inicial do jogo, regras e diálogos
-# carregamento()
-# escrever_texto('\nJogo carregado.')
-# time.sleep(2)
-# os.system('cls') # limpa o terminal para deixar a interface mais limpa
-# regras()
+carregamento()
+escrever_texto('\nJogo carregado.')
+time.sleep(2)
+os.system('cls') # limpa o terminal para deixar a interface mais limpa
+regras()
+dialogo()
 
 cont = 1 # quant mago
-# dialogo()
+força = False
 
 player = 100 # vida do jogador
-mago = 15 # vida do mago
+mago = 100 # vida do mago
 mana_player = 100 # mana do jogador
 mana_mago = 100 # mana do mago
 
@@ -292,9 +293,16 @@ while player > 0 or mago > 0:
                     time.sleep(0.1)
                 time.sleep(1)
 
-                if var < 1:
-                    print() # provisório, adicionar ultimas palavras
-                elif var >= 1:
+                if mago <= var:
+                    escrever_texto('Você acerta um golpe em cheio no mago')
+                    time.sleep(1)
+
+                    dano_mago(player, mago, mana_player, mana_mago, total, var)
+                    
+                    escrever_texto('Você derrota o mago.')
+                    time.sleep(1)
+
+                elif mago > var:
                     
                     os.system('cls')
                     mensagem = 'Você ataca, e ele se esquiva.'
@@ -333,7 +341,16 @@ while player > 0 or mago > 0:
                 time.sleep(1)
                 
                 dano_player(player, mago, mana_player, mana_mago, total, dano + 1)
-                    
+
+                mensagem = 'Desbloqueado: Ataque de raiva'
+                escrever_texto_na_caixa(mensagem, largura=40, velocidade=0.03)
+                time.sleep(1)
+
+                os.system('cls')
+                escrever_texto('Descrição:')
+                time.sleep(0.5)
+                escrever_texto('Seus ataques agora podem dar de 5-30 de dano.')
+                
             cont -= 1 # vingança aparece apenas uma vez no jogo
 
     continuar = input('Deseja continuar jogando? (s/n): ').strip().lower()
@@ -359,5 +376,6 @@ while player > 0 or mago > 0:
         carregamento()
         escrever_texto('\nSistema finalizado.')
         break
+
     elif continuar == 's':
         continue
