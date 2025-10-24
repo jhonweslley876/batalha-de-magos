@@ -2,18 +2,18 @@ from funções import *
 from quadros import *
 
 # carregamento inicial do jogo, regras e diálogos
-carregamento()
-escrever_texto('\nJogo carregado.')
-time.sleep(2)
-os.system('cls') # limpa o terminal para deixar a interface mais limpa
-regras()
-dialogo()
+# carregamento()
+# escrever_texto('\nJogo carregado.')
+# time.sleep(2)
+# os.system('cls') # limpa o terminal para deixar a interface mais limpa
+# regras()
+# dialogo()
 
 cont = 1 # quant mago
 força = False
 
 player = 100 # vida do jogador
-vida_mago = 100 # vida do mago
+vida_mago = 15 # vida do mago
 mana_player = 100 # mana do jogador
 mana_mago = 100 # mana do mago
 
@@ -46,9 +46,9 @@ while player > 0 or vida_mago > 0:
         print('┌───┬─────────┬───┬───────────┐')
         print('│ 1 │ comprar │ 2 │ finalizar │')
         print('└───┴─────────┴───┴───────────┘')
-        compras = int(input('Digite a sua escolha:  ')) # sistema de compra de cartas
+        compras = input('Digite a sua escolha:  ') # sistema de compra de cartas
 
-        if compras == 1:
+        if compras == '1':
             if mana_player < 10: # se o jogador não tiver mana, para de comprar
                 escrever_texto('Mana insuficiente para comprar cartas')
                 time.sleep(1)
@@ -68,12 +68,14 @@ while player > 0 or vida_mago > 0:
             if total > 21:
                 break
 
-        elif compras == 2:
+        elif compras == '2':
             os.system('cls')
             break
 
         else:
             os.system('cls')
+            print(f'Suas cartas: {", ".join(formatar_carta(c) for c in cartas)}.')
+            print(f'Seu total é: {total}.')
             escrever_texto('Digite apenas "comprar" ou "finalizar"!')
 
     print('__________________________________________________')
@@ -283,19 +285,6 @@ while player > 0 or vida_mago > 0:
             mana_player -= 10
             mana_mago -= 10
 
-    if player <= 0:
-        player = 0
-        os.system('cls')
-        magos(player, vida_mago, mana_player, mana_mago)
-        print(f'Que pena, você perdeu todo o seu HP. Tente novamente.')
-        break
-
-    elif vida_mago <= 0:
-        vida_mago = 0
-        os.system('cls')
-        magos(player, vida_mago, mana_player, mana_mago)
-        escrever_texto('Parabéns, você venceu o mago!')
-        break
 
     if cont == 1: 
         if vida_mago <= 15:
@@ -311,12 +300,14 @@ while player > 0 or vida_mago > 0:
             if escolha == 1:
                 for c in range(30):
                     var = random.randint(1, 20)
-                    print(f'\r{var} ATK', end='', flush=True)
+                    print(f'\r{var} ATK', end=' ', flush=True)
                     time.sleep(0.1)
                 time.sleep(1)
+                print(' ')
+                os.system('cls')
 
                 if vida_mago <= var:
-                    escrever_texto('\nVocê acerta um golpe em cheio no mago')
+                    escrever_texto('Você acerta um golpe em cheio no mago')
                     time.sleep(1)
 
                     dano_mago(player, vida_mago, mana_player, mana_mago, total, var)
@@ -327,8 +318,9 @@ while player > 0 or vida_mago > 0:
                 elif vida_mago > var:
                     
                     os.system('cls')
-                    mensagem = '\nVocê ataca, e ele se esquiva.'
-                    escrever_texto_na_caixa(mensagem, largura = 40, velocidade = 0.03)
+
+                    mensagem = 'Você ataca, e ele se esquiva.'
+                    escrever_texto_na_caixa(mensagem, largura = 50, velocidade = 0.03)
                     time.sleep(1)
                     
                     mensagem = 'Após isso, ele abre seu livro, e utiliza um dado de cura.'
@@ -339,7 +331,7 @@ while player > 0 or vida_mago > 0:
                     
                     for c in range(30):
                         vida = random.randint(1, 20)
-                        print(f'\r{vida} HP', end='', flush=True)
+                        print(f'\r{vida} HP', end=' ', flush=True)
                         time.sleep(0.1)
                     time.sleep(1)
                         
@@ -355,7 +347,7 @@ while player > 0 or vida_mago > 0:
                 os.system('cls')
                 for c in range(dano):
                     dano = c
-                    print(f'\r{c}', end='', flush=True) 
+                    print(f'\r{c}', end=' ', flush=True) 
                     time.sleep(0.1)
 
                 os.system('cls')
@@ -379,6 +371,20 @@ while player > 0 or vida_mago > 0:
                 
             cont -= 1 # vingança aparece apenas uma vez no jogo
 
+    if player <= 0:
+        player = 0
+        os.system('cls')
+        magos(player, vida_mago, mana_player, mana_mago)
+        print(f'Que pena, você perdeu todo o seu HP. Tente novamente.')
+        break
+
+    elif vida_mago <= 0:
+        vida_mago = 0
+        os.system('cls')
+        magos(player, vida_mago, mana_player, mana_mago)
+        escrever_texto('Parabéns, você venceu o mago!')
+        break
+
     continuar = input('Deseja continuar jogando? (s/n): ').strip().lower()
     os.system('cls')  
 
@@ -395,7 +401,7 @@ while player > 0 or vida_mago > 0:
 
         os.system('cls')
 
-        print('Vida final do jogo:')
+        print('Estatísticas finais do jogo:')
         magos(player, vida_mago, mana_player, mana_mago)
 
         print('saindo...')

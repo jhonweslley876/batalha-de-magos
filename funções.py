@@ -1,4 +1,3 @@
-
 import os
 import random
 import time
@@ -93,7 +92,7 @@ def regras():
     print(tabela)
     print('│     Um valor total de 21 nas cartas resultará em um bônus de +10 ATK     │')
     print(tabela)
-    print('│     A carta "A" Vale por 1, já as cartas "K", "Q" e "J" valem por 1      │')
+    print('│     A carta "A" Vale por 1, já as cartas "K", "Q" e "J" valem por 10     │')
     print('└──────────────────────────────────────────────────────────────────────────┘')
     
     escrever_texto('Pressione "enter" para passar.')
@@ -175,4 +174,3 @@ def magos(vida1, vida2, mana, mana_bot): # estatísticas do jogador e mago
         print(quadro)
         print(f'│  {mana} Mana  │   {mana_bot} Mana  │')
         print('└────────────┴────────────┘')
-
