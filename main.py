@@ -2,12 +2,12 @@ from funções import *
 from quadros import *
 
 # carregamento inicial do jogo, regras e diálogos
-# carregamento()
-# escrever_texto('\nJogo carregado.')
-# time.sleep(2)
-# os.system('cls') # limpa o terminal para deixar a interface mais limpa
-# regras()
-# dialogo()
+carregamento()
+escrever_texto('\nJogo carregado.')
+time.sleep(2)
+os.system('cls') # limpa o terminal para deixar a interface mais limpa
+regras()
+dialogo()
 
 cont = 1 # quant mago
 força = False
@@ -410,4 +410,5 @@ while player > 0 or vida_mago > 0:
         break
 
     elif continuar == 's':
+
         continue
