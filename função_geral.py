@@ -419,6 +419,13 @@ def atualizar_level(nome, novo_level):
     conexão.commit()
     conexão.close()
 
+def excluir(nome):
+    conexão = conectar()
+    cursor = conexão.cursor()
+    cursor.execute('DELETE FROM jogo WHERE nome=?', (nome,))
+    conexão.commit()
+    conexão.close()
+
 def login():
     print('┌───┬─────────────┬───┬─────────────────┐')
     print('│ 1 │ CRIAR CONTA │ 2 │   FAZER LOGIN   │')
@@ -451,13 +458,17 @@ def login():
                 sys.stdout.flush()
 
                 senha = input('│Digite a senha da sua conta: ')
-                inserir(nome, senha, nível)
                 time.sleep(1)
                 os.system('cls')
-                print('Conta criada com sucesso.')
+                if senha == '':
+                    print('Digite uma senha para criar a conta!')
+                else:
+                    print('Conta criada com sucesso.')
+                    inserir(nome, senha, nível)
+                    break
                 time.sleep(1)
                 os.system('cls')
-                break
+                
 
             else:
                 print('Este nome de usuário já existe, tente outro.')
@@ -478,7 +489,10 @@ def login():
             time.sleep(1)
             os.system('cls')
 
-            if jogador:
+            if jogador == '':
+                print('O nome deve conter pelo menos 1 caractere.')
+
+            elif jogador:
                 print(f'''┌───────────────────────────────────────────────────┐
                 │                                   │
 └───────────────────────────────────────────────────┘''')
@@ -494,7 +508,6 @@ def login():
                     time.sleep(2)
                     os.system('cls')
                     break
-                    
                 elif senha != jogador[1]:
                     print('Senha incorreta. (para sair do login aperte "0")')
 

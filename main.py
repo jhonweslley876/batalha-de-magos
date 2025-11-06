@@ -4,6 +4,7 @@ nome = login()
 jogador = buscar_jogador(nome)
 nível = jogador[2]
 
+
 # carregamento inicial do jogo, regras e diálogos
 carregamento()
 escrever_texto('\nJogo carregado.')
