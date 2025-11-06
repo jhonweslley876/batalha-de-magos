@@ -4,7 +4,6 @@ nome = login()
 jogador = buscar_jogador(nome)
 nível = jogador[2]
 
-
 # carregamento inicial do jogo, regras e diálogos
 carregamento()
 escrever_texto('\nJogo carregado.')
@@ -12,7 +11,6 @@ escrever_texto('\nJogo carregado.')
 time.sleep(2)
 os.system('cls') # limpa o terminal para deixar a interface mais limpa
 tutorial = input('Ver tutorial? (s/n): ').lower()
-
 if tutorial == 's':
     regras()
 else:
