@@ -33,6 +33,8 @@ def escrever_texto_na_caixa(texto, largura=50, velocidade=0.03):
             sys.stdout.write(letra)
             sys.stdout.flush()
             time.sleep(velocidade)
+        if keyboard.is_pressed('enter'):
+            break
         sys.stdout.write(" " * (largura - len(linha)) + " │\n")  # Preenche o resto da linha
     # Move o cursor para baixo até fora da caixa
     print("\033[" + str(len(linhas)) + "B", end="")
@@ -427,6 +429,11 @@ def excluir(nome):
     conexão.close()
 
 def login():
+    apollo = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%¨&*(),.;:/?~´ãéàÀÉÃêÊçÇ[]{}º°+-=_§¹²³£¢¬""'
+    contador = 0
+    criar = False
+    espaço = False
+
     print('┌───┬─────────────┬───┬─────────────────┐')
     print('│ 1 │ CRIAR CONTA │ 2 │   FAZER LOGIN   │')
     print('└───┴─────────────┴───┴─────────────────┘')
@@ -436,45 +443,75 @@ def login():
     os.system('cls')
     while True:
         if n == 1:
+            print('Digite o nome do seu personagem')
             print(f'''┌───────────────────────────────────────────────────┐
-            │                                       │
+                                                    │
 └───────────────────────────────────────────────────┘''')
 
             sys.stdout.write("\033[F" * 2)
             sys.stdout.flush()
 
-            nome = input('Nome de usuário: ')
+            nome = input('│ User: ')
             jogador = buscar_jogador(nome)
-            time.sleep(1)
+            time.sleep(1.5)
             os.system('cls')
             nível = 1
-            
-            if not jogador:
-                print(f'''┌───────────────────────────────────────────────────┐
-            │                                       │
-└───────────────────────────────────────────────────┘''')
 
-                sys.stdout.write("\033[F" * 2)
-                sys.stdout.flush()
-
-                senha = input('│Digite a senha da sua conta: ')
-                time.sleep(1)
-                os.system('cls')
-                if senha == '':
-                    print('Digite uma senha para criar a conta!')
-                else:
-                    print('Conta criada com sucesso.')
-                    inserir(nome, senha, nível)
+            for c in nome:
+                if c in apollo:
+                    contador = 1
                     break
-                time.sleep(1)
-                os.system('cls')
-                
 
+            tamanho = len(nome)
+
+            if tamanho < 2:
+                print('Seu nick deve conter pelo menos 2 caracteres!')
+
+            elif contador == 1:
+                if not jogador:
+
+                    print('Digite a senha da sua conta')
+                    while True:
+                        print(f'''┌─────────────────────────────────────────────────────────────────┐
+                                                                  │
+└─────────────────────────────────────────────────────────────────┘''')
+
+                        sys.stdout.write("\033[F" * 2)
+                        sys.stdout.flush()
+                        senha = input('│ Senha: ')
+                        time.sleep(1.5)
+                        os.system('cls')
+
+                        for d in senha:
+                            if d == ' ':
+                                espaço = True
+                                break
+
+                        if senha == '':
+                            print('Digite uma senha válida!')
+                            espaço = False
+                        elif espaço == False:
+                            print('Conta criada com sucesso.')
+                            inserir(nome, senha, nível)
+                            criar = True
+                            break
+                        else:
+                            print('Digite uma senha válida!')
+                            espaço = False
+                        
+                    time.sleep(1.5)
+                    os.system('cls')
+
+                    if criar == True:
+                        break
+
+                else:
+                    print('Este nome de usuário já existe, tente outro.')
+                    time.sleep(1.5)
+                    os.system('cls')
             else:
-                print('Este nome de usuário já existe, tente outro.')
-                time.sleep(1)
-                os.system('cls')
-            
+                print('Você não pode deixar o seu nome em branco.')
+
         elif n == 2:
             print(f'''┌───────────────────────────────────────────────────┐
             │                                       │
@@ -483,38 +520,38 @@ def login():
             sys.stdout.write("\033[F" * 2)
             sys.stdout.flush()
 
-            nome = input('│Nome de usuário: ')
+            nome = input('│ Nome de usuário: ')
             jogador = buscar_jogador(nome)
             
             time.sleep(1)
             os.system('cls')
 
-            if jogador == '':
-                print('O nome deve conter pelo menos 1 caractere.')
-
-            elif jogador:
-                print(f'''┌───────────────────────────────────────────────────┐
-                │                                   │
-└───────────────────────────────────────────────────┘''')
-                nível = jogador[2]
-                sys.stdout.write("\033[F" * 2)
-                sys.stdout.flush()
-                senha = input('│Digite a sua senha: ')
-                time.sleep(1)
-                os.system('cls')
-
-                if senha == jogador[1]:
-                    escrever_texto(f'bem vindo jogador {jogador[0]}, seu nível é {jogador[2]}')
-                    time.sleep(2)
+            if jogador:
+                while True:
+                    print(f'''┌──────────────────────────────────────────────────────────┐
+                                                           │
+└──────────────────────────────────────────────────────────┘''')
+                    nível = jogador[2]
+                    sys.stdout.write("\033[F" * 2)
+                    sys.stdout.flush()
+                    senha = input('│ Digite a sua senha: ')
+                    time.sleep(1)
                     os.system('cls')
-                    break
-                elif senha != jogador[1]:
-                    print('Senha incorreta. (para sair do login aperte "0")')
 
-                elif senha == 0:
-                    print('Saindo...')
-                    break
+                    if senha == jogador[1]:
+                        escrever_texto(f'bem vindo jogador {jogador[0]}, seu nível é {jogador[2]}')
+                        time.sleep(2)
+                        os.system('cls')
+                        criar = True
+                        break
+                    elif senha != jogador[1]:
+                        print('Senha incorreta. (para sair do login aperte "0")')
 
+                    elif senha == 0:
+                        print('Saindo...')
+                        break
+                if criar == True:
+                    break
             elif nome == '0':
                     print('┌───┬─────────────┬───┬─────────────────┐')
                     print('│ 1 │ CRIAR CONTA │ 2 │   FAZER LOGIN   │')
@@ -523,6 +560,8 @@ def login():
                     n = int(input())
             elif not jogador:
                 print('Esse usuário não existe. (aperte 0 para voltar para o inicio)')
+        else:
+            print('Digite apenas 1 ou 2 para escolher.')
 
     os.system('cls')
     return nome

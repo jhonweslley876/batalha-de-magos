@@ -87,7 +87,7 @@ while player > 0 or vida_mago > 0:
             os.system('cls')
             print(f'Suas cartas: {", ".join(formatar_carta(c) for c in cartas)}.')
             print(f'Seu total é: {total}.')
-            escrever_texto('Digite apenas "comprar" ou "finalizar"!')
+            escrever_texto('Digite apenas 1 para comprar ou 2 para finalizar!')
 
     print('__________________________________________________')
 
@@ -124,7 +124,7 @@ while player > 0 or vida_mago > 0:
         print(f'Mago: {", ".join(formatar_carta(c) for c in cartas_bot)}')
         print(f'Mago: {mago_total}')
 
-        while mago_total < 16:
+        while mago_total < 17:
             if mana_mago < 10:
                 break
 
@@ -392,7 +392,7 @@ while player > 0 or vida_mago > 0:
                 
                 dano_player(player, vida_mago, mana_player, mana_mago, total, dano + 1)
 
-                mensagem = 'Desbloqueado: Ataque de raiva'
+                mensagem = 'Desbloqueado: Fúria arcana'
                 escrever_texto_na_caixa(mensagem, largura=40, velocidade=0.03)
                 time.sleep(0.3)
                 escrever_texto('Enter para continuar')
@@ -402,7 +402,8 @@ while player > 0 or vida_mago > 0:
                 os.system('cls')
                 escrever_texto('Descrição:')
                 time.sleep(0.5)
-                escrever_texto('Seus ataques agora podem dar de 5 - 30 de dano.')
+                escrever_texto('Seus ataques agora podem dar de 5-30 de dano.')
+                time.sleep(1)
                 força = True
             else:
                 print('Escolha apenas 1 ou 2!')
