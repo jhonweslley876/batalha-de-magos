@@ -10,13 +10,18 @@ escrever_texto('\nJogo carregado.')
 
 time.sleep(2)
 os.system('cls') # limpa o terminal para deixar a interface mais limpa
-tutorial = input('Ver tutorial? (s/n): ').lower()
-if tutorial == 's':
-    regras()
-else:
-    escrever_texto('Começando jogo...')
-    print('')
-    time.sleep(1)
+while True:
+    tutorial = input('Ver tutorial? (s/n): ').lower()
+    if tutorial == 's':
+        regras()
+        break
+    elif tutorial == 'n':
+        escrever_texto('Começando jogo...')
+        print('')
+        time.sleep(1)
+        break
+    else:
+        print('Digite apenas "s" ou "n".')
 
 dialogo()
 
@@ -404,7 +409,7 @@ while player > 0 or vida_mago > 0:
                 escrever_texto('Descrição:')
                 time.sleep(0.5)
                 escrever_texto('Seus ataques agora podem dar de 5-30 de dano.')
-                time.sleep(1)
+                time.sleep(1.5)
                 força = True
             else:
                 print('Escolha apenas 1 ou 2!')
