@@ -421,6 +421,13 @@ def atualizar_level(nome, novo_level):
     conexão.commit()
     conexão.close()
 
+def atualizar(nome, nova_senha):
+    conexão = conectar()
+    cursor = conexão.cursor()
+    cursor.execute('UPDATE jogo SET senha=? WHERE nome=?', (nova_senha, nome))
+    conexão.commit()
+    conexão.close()
+
 def excluir(nome):
     conexão = conectar()
     cursor = conexão.cursor()
@@ -432,7 +439,6 @@ def login():
     apollo = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%¨&*(),.;:/?~´ãéàÀÉÃêÊçÇ[]{}º°+-=_§¹²³£¢¬""'
     contador = 0
     criar = False
-    espaço = False
 
     print('┌───┬─────────────┬───┬─────────────────┐')
     print('│ 1 │ CRIAR CONTA │ 2 │   FAZER LOGIN   │')
@@ -459,15 +465,14 @@ def login():
 
             for c in nome:
                 if c in apollo:
-                    contador = 1
-                    break
+                    contador += 1
 
             tamanho = len(nome)
 
             if tamanho < 2:
                 print('Seu nick deve conter pelo menos 2 caracteres!')
 
-            elif contador == 1:
+            elif contador >= 2:
                 if not jogador:
 
                     print('Digite a senha da sua conta')
@@ -482,22 +487,20 @@ def login():
                         time.sleep(1.5)
                         os.system('cls')
 
-                        for d in senha:
-                            if d == ' ':
-                                espaço = True
+                        for k in senha:
+                            if k in apollo:
+                                criar = True
                                 break
 
                         if senha == '':
                             print('Digite uma senha válida!')
-                            espaço = False
-                        elif espaço == False:
+                        elif criar == True:
                             print('Conta criada com sucesso.')
                             inserir(nome, senha, nível)
                             criar = True
                             break
                         else:
                             print('Digite uma senha válida!')
-                            espaço = False
                         
                     time.sleep(1.5)
                     os.system('cls')

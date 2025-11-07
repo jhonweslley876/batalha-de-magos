@@ -391,6 +391,7 @@ while player > 0 or vida_mago > 0:
                 time.sleep(1)
                 
                 dano_player(player, vida_mago, mana_player, mana_mago, total, dano + 1)
+                player -= dano
 
                 mensagem = 'Desbloqueado: Fúria arcana'
                 escrever_texto_na_caixa(mensagem, largura=40, velocidade=0.03)
