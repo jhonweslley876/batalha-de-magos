@@ -1,4 +1,5 @@
 from função_geral import *
+import webbrowser
 
 nome = login()
 jogador = buscar_jogador(nome)
